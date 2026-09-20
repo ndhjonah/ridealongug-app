@@ -1,0 +1,31 @@
+ database settings - local DBeaver/Postgres instance
+spring.datasource.url=jdbc:postgresql://localhost:5432/ridealongug
+spring.datasource.username=postgres
+spring.datasource.password=your_local_password_here
+
+server.port=8080
+
+# Bootstrap Super Admin - created automatically on first boot if no ADMINISTRATOR exists.
+# CHANGE THE PASSWORD after your first login, then feel free to remove these overrides.
+BOOTSTRAP_ADMIN_USERNAME=admin
+BOOTSTRAP_ADMIN_PASSWORD=ChangeMe123!
+BOOTSTRAP_ADMIN_EMAIL=admin@ridealongug.com
+
+# Demo data - vehicle categories, a dealer, and 5 sample vehicles (inspected, insured,
+# serviced, and visible for booking). Set to false once you have real data or want a
+# clean run for your presentation.
+SEED_DEMO_DATA=true
+
+
+PLATFORM_COMMISSION_PERCENTAGE=20
+
+# Email - required for booking confirmation and password reset emails to actually send.
+# Example below works with a Gmail account + an "app password" (not your normal password):
+# https://myaccount.google.com/apppasswords
+app.name=RideAlongUG
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your_email@gmail.com
+spring.mail.password=your_16_char_app_password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
