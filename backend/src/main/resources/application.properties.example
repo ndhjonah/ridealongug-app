@@ -1,0 +1,27 @@
+# Database - create 'ridealongug' in PostgreSQL first
+spring.datasource.url=jdbc:postgresql://localhost:5432/ridealongug
+spring.datasource.username=postgres
+spring.datasource.password=your_local_password_here
+
+server.port=8080
+
+# Main Admin Account
+# Created automatically on first run. Log in and change this password later.
+BOOTSTRAP_ADMIN_USERNAME=admin
+BOOTSTRAP_ADMIN_PASSWORD=ChangeMe123!
+BOOTSTRAP_ADMIN_EMAIL=admin@ridealongug.com
+
+# Load sample data (cars, categories, test dealer). Set to false for a clean database.
+SEED_DEMO_DATA=true
+
+PLATFORM_COMMISSION_PERCENTAGE=20
+
+# Email setup for booking confirmations and password resets.
+# Use a 16-character Gmail App Password here, NOT your main account password.
+app.name=RideAlongUG
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your_email@gmail.com
+spring.mail.password=your_16_char_app_password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
