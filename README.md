@@ -1,0 +1,1 @@
+# RideAlongUG ## Structure - /backend - Spring Boot API (Java) - /frontend - React app ## Setup - Backend cd backend, open in IntelliJ or run: mvn spring-boot:run Requires Java 17+, Maven ## Setup - Frontend cd frontend, npm install, npm start ## Branching Branch off main: feature/<area>-<desc> PR into main, don't push directly

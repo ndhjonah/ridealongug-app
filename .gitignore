@@ -1,4 +1,50 @@
-target/ rm -rf target
-src/main/resources/application.properties
-src/main/resources/application-dev.properties
+# ==========================================
+# Root & IDE Files
+# ==========================================
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Spring Boot (Backend)
+# ==========================================
+**/target/
 target/
+backend/target/
+backend/ridealongug-backend/target/
+
+# Sensitive properties and secrets
+**/application-dev.properties
+**/application-prod.properties
+**/application-local.properties
+**/application-secrets.properties
+backend/src/main/resources/application-dev.properties
+backend/ridealongug-backend/src/main/resources/application-dev.properties
+
+# Log files
+*.log
+
+# ==========================================
+# Angular (Frontend)
+# ==========================================
+**/node_modules/
+node_modules/
+frontend/node_modules/
+
+**/dist/
+dist/
+frontend/dist/
+
+**/.angular/
+.angular/
+frontend/.angular/
+
+# Angular build caches and logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.sass-cache/
