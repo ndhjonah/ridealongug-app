@@ -12,6 +12,8 @@ import com.ridealongug.backend.models.jpahelpers.sortingAndFiltering.SearchReque
 import com.ridealongug.backend.models.jpahelpers.sortingAndFiltering.SearchSpecification;
 import com.ridealongug.backend.repositories.*;
 import com.ridealongug.backend.services.coupon.DiscountCouponService;
+import com.ridealongug.backend.services.earning.EarningService;
+import com.ridealongug.backend.services.email.EmailService;
 import com.ridealongug.backend.services.notification.NotificationService;
 import com.ridealongug.backend.services.base.BaseWebActionsService;
 import com.ridealongug.backend.services.vehicle.VehicleAvailabilityService;
@@ -42,8 +44,10 @@ public class BookingService extends BaseWebActionsService {
     private final VehicleService vehicleService;
     private final DiscountCouponService discountCouponService;
     private final NotificationService notificationService;
-    private final com.ridealongug.backend.services.earning.EarningService earningService;
+    private final EarningService earningService;
     private final PaymentRepository paymentRepository;
+    private final EmailService emailService;
+    private final SystemUserRepository systemUserRepository;
 
     private OperationReturnObject createBooking(JSONObject request) {
         requiresAuth();
@@ -375,6 +379,12 @@ public class BookingService extends BaseWebActionsService {
 
         vehicleRepository.findById(booking.getVehicleId()).ifPresent(vehicle ->
                 earningService.recordEarning(booking.getId(), vehicle.getId(), vehicle.getOwnerId(), booking.getTotalCost())
+        );
+
+        vehicleRepository.findById(booking.getVehicleId()).ifPresent(vehicle ->
+                systemUserRepository.findById(booking.getCustomerId()).ifPresent(customer ->
+                        emailService.sendBookingConfirmedEmail(customer, vehicle, saved)
+                )
         );
 
         OperationReturnObject res = new OperationReturnObject();
