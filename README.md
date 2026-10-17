@@ -9,7 +9,7 @@ A car rental platform for Uganda - customers can browse and book cars, trucks an
 
 ## Running it locally
 
-You'll need Java 17+, Maven, Node, and a Postgres instance running somewhere.
+You'll need Java 21, Maven, Node, and a Postgres instance running somewhere.
 
 ### 1. Database
 
@@ -17,7 +17,7 @@ Create a Postgres database for the project. Any name works, just make sure it ma
 
 ### 2. Backend
 
-Inside `backend/ridealongug-backend/src/main/resources/`, copy `application.properties.example` to a new file (`application.properties` or `application-dev.properties`, depending on which profile you're running) and fill in your own values - DB URL, username, password, JWT secret, and mail credentials if you're working with the email feature.
+Inside `backend/src/main/resources/`, copy `application.properties.example` to a new file called `application.properties` and fill in your own values - DB URL, username, password, the JWT secret, and mail credentials if you're working with the email feature. The secret has to be base64, so generate one with `openssl rand -base64 64`. This file is gitignored on purpose, so your real values never end up in the repo.
 
 Once that's set, run the backend from IntelliJ or from the terminal:
 
@@ -48,8 +48,16 @@ npm start
 
 Open `http://localhost:5173` in your browser once it's compiled.
 
-If your backend isn't running on `localhost:8080`, update the base URL in `frontend/src/app/core/api.service.ts` before starting.
+The frontend talks to `localhost:8080` when you run it locally and to the hosted backend otherwise. Both URLs are at the top of `frontend/src/app/core/api.service.ts` if you need to change either.
 
 ## Branching
 
 Branch off `main`: `feature/<area>-<short-description>`. Open a PR into `main` rather than pushing directly, especially now that there's more than one of us on this.
+
+## Deploying
+
+The free setup we use: Neon for Postgres, Render for the backend (it builds from `backend/Dockerfile`, with Root Directory set to `backend`) and Vercel for the frontend (Root Directory `frontend`, output directory `dist/ridealongug-frontend/browser`).
+
+Render has no `application.properties` to read, so every value from the example file goes into its Environment tab as an environment variable instead, written in upper case with underscores (`spring.datasource.url` becomes `SPRING_DATASOURCE_URL`). The ones that aren't in the example but are still required are `SPRING_JPA_HIBERNATE_DDL_AUTO=update`, `SECRET`, `APP_VERSION`, `ADMIN_ROLE_NAME` and `ADMIN_ROLE_DOMAIN`.
+
+Render's free tier blocks outbound SMTP on ports 25, 465 and 587, so Gmail can't send from there. Use an email provider that offers port 2525 or an HTTP API instead.
