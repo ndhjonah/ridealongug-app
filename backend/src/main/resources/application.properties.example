@@ -3,7 +3,18 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/ridealongug
 spring.datasource.username=postgres
 spring.datasource.password=your_local_password_here
 
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.open-in-view=false
+
 server.port=8080
+
+# Signs the login tokens. Must be base64. Generate one with: openssl rand -base64 64
+secret=paste_your_generated_value_here
+
+app.version=RAU-BACKEND-1
+
+ADMIN_ROLE_NAME=ADMINISTRATOR
+ADMIN_ROLE_DOMAIN=BACK_OFFICE
 
 # Main Admin Account
 # Created automatically on first run. Log in and change this password later.
@@ -15,6 +26,7 @@ BOOTSTRAP_ADMIN_EMAIL=admin@ridealongug.com
 SEED_DEMO_DATA=true
 
 PLATFORM_COMMISSION_PERCENTAGE=20
+FUEL_PRICE_PER_LITRE=5500
 
 # Email setup for booking confirmations and password resets.
 # Use a 16-character Gmail App Password here, NOT your main account password.
