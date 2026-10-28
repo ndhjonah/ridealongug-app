@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
-const BASE_URL = 'http://localhost:8080/api/v1/';
+const LOCAL_API_URL = 'http://localhost:8080/api/v1/';
+const HOSTED_API_URL = 'https://ridealongug-backend.onrender.com/api/v1/';
+const BASE_URL = ['localhost', '127.0.0.1'].includes(location.hostname) ? LOCAL_API_URL : HOSTED_API_URL;
 
 export interface SearchFilter {
   key: string;
